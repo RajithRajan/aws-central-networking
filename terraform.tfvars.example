@@ -1,0 +1,52 @@
+# Example Terraform variables file
+
+region = "us-east-1"
+
+central_account_id = "123456789012"
+
+transit_gateway = {
+  name        = "central-tgw"
+  description = "Central Transit Gateway"
+}
+
+segments = ["shared", "prod", "dev", "staging"]
+
+vpc_attachments = [
+  {
+    name       = "prod-vpc-attachment"
+    vpc_id     = "vpc-12345678"
+    subnet_ids = ["subnet-11111111", "subnet-22222222"]
+    segment    = "prod"
+  },
+  {
+    name       = "dev-vpc-attachment"
+    vpc_id     = "vpc-87654321"
+    subnet_ids = ["subnet-33333333", "subnet-44444444"]
+    segment    = "dev"
+  },
+  {
+    name       = "shared-vpc-attachment"
+    vpc_id     = "vpc-99999999"
+    subnet_ids = ["subnet-55555555", "subnet-66666666"]
+    segment    = "shared"
+  }
+]
+
+# For cross-account attachments, uncomment and configure
+# cross_account_providers = {
+#   "prod-account" = {
+#     account_id = "987654321098"
+#     role_arn   = "arn:aws:iam::987654321098:role/TerraformRole"
+#   }
+# }
+
+# And add account_name to attachments
+# vpc_attachments = [
+#   {
+#     name        = "cross-account-vpc"
+#     vpc_id      = "vpc-abcdef12"
+#     subnet_ids  = ["subnet-abcdef12", "subnet-abcdef13"]
+#     account_name = "prod-account"
+#     segment     = "prod"
+#   }
+# ]
